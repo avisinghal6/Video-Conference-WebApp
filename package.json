@@ -1,0 +1,28 @@
+{
+  "name": "serverside",
+  "version": "1.0.0",
+  "description": "server side files for the video conference application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/avisinghal6/Video-Conference-WebApp.git"
+  },
+  "keywords": [
+    "express.js",
+    "socket.io"
+  ],
+  "author": "Avi Singhal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/avisinghal6/Video-Conference-WebApp/issues"
+  },
+  "homepage": "https://github.com/avisinghal6/Video-Conference-WebApp#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "socket.io": "^4.7.1"
+  }
+}
