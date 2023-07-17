@@ -4,7 +4,6 @@ import Notifications from './components/Notifications';
 import Options from './components/Options';
 import useStyles from './styles/AppStyles';
 
-
 function App() {
   const classes= useStyles();
   return (
