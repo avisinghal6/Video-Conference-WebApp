@@ -9,7 +9,7 @@ const socket= io('http://localhost:2000');
 const ContextProvider =({children})=>{
     const [stream,setStream] =useState(null);
     const [me, setMe] = useState('');
-    const [call, setCall]= useState();
+    const [call, setCall]= useState({});
     const [callAccepted, setCallAccepted]= useState(false);
     const [callEnded, setCallEnded]= useState(false);
     const [name,setName]= useState('');
