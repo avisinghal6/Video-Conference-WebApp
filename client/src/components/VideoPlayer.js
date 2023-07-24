@@ -1,6 +1,6 @@
 import {Button, Grid, Typography, Paper} from '@material-ui/core';
 import {useState} from 'react';
-import { Mic as MicIcon, MicOff as MicOffIcon ,VolumeMute , VideocamOff} from '@material-ui/icons';
+import { Mic as MicIcon, MicOff as MicOffIcon , VideocamOff, Videocam as VideocamIcon} from '@material-ui/icons';
 import { SocketContext } from '../SocketContext';
 import useStyles from '../styles/VideoPlayer';
 import { useContext } from 'react';
@@ -8,7 +8,7 @@ const VideoPlayer = () => {
     const {name, callAccepted, myVideo, userVideo, callEnded, stream, call}= useContext(SocketContext);
     const classes = useStyles();
     const [mute,setMute] =useState(false);
-    // const [video,setVideo] =useState(null);
+    const [video,setVideo] =useState(true);
     return(
         <Grid container className={classes.gridContainer} spacing={2}>
             {
@@ -27,10 +27,16 @@ const VideoPlayer = () => {
                         }}>
                         {mute?"Unmute":"Mute"}
                     </Button>
-                    <Button variant="contained" color="primary" sx={{ m: 2, marginLeft: 5  }} startIcon= {< VideocamOff/>} onClick={() => {
-                        myVideo.current.srcObject=null
+                    <Button variant="contained" color="primary" sx={{ m: 2, marginLeft: 5  }} startIcon= {(video && < VideocamOff/>) || (!video && < VideocamIcon/>)} onClick={() => {
+                        if(video){
+                            myVideo.current.srcObject=null
+                            setVideo(false)
+                        }else{
+                            myVideo.current.srcObject=stream
+                            setVideo(true)
+                        }
                         }}>
-                        Video Off
+                        {video?"Video Off":"Video On"}
                     </Button>
                 </Grid>
             </Paper>
