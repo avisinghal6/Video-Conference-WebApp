@@ -1,5 +1,5 @@
 import {createContext, useState, useRef, useEffect} from 'react';
-import {Socket, io} from 'socket.io-client';
+import {io} from 'socket.io-client';
 import Peer from 'simple-peer';
 
 const SocketContext= createContext();
@@ -20,7 +20,7 @@ const ContextProvider =({children})=>{
         navigator.mediaDevices.getUserMedia({video:true, audio: true})
             .then((currentStream) => {
                 setStream(currentStream);
-
+                console.log(myVideo.current)
                 if (myVideo.current) {
                     myVideo.current.srcObject = currentStream;
                 }
@@ -31,47 +31,49 @@ const ContextProvider =({children})=>{
         });
 
         socket.on('callUser',({data, from, name})=>{
-            setCall({isReceivedCall:true, data,from,name});
+            setCall({isReceivedCall:true, data: data,from : from,name: name});
         });
 
 
     },[]);
     const answerCall= () =>{
         setCallAccepted(true);
-
+        
         const peer = new Peer({ initiator:false, trickle:false, stream});
 
-        peer.on('data', (data)=>{
-            socket.emit('answerCall',{data,to:call.from});
+        peer.on('signal', (data)=>{
+            console.log("answering")
+            socket.emit('answercall',{data: data,to:call.from});
         });
 
         peer.on('stream', (currentStream) =>{
-            userVideo.current.srcObject= currentStream;
-        });
+            if (userVideo.current) {
+                userVideo.current.srcObject = currentStream;
+            }
 
+        });
+    
         peer.signal(call.data);
 
         connectionRef.current = peer;
     }
 
-    const callUser=(id,) =>{
+    const callUser=(id) =>{
         const peer = new Peer({ initiator:true, trickle:false, stream});
-
-        peer.on('data', (data)=>{
-            socket.emit('callUser',{id,data, me, name});
+        peer.on('signal', (data)=>{
+            socket.emit('calluser',{toUser: id,data: data, from: me, name: name});
         });
 
         peer.on('stream', (currentStream) =>{
-            userVideo.current.srcObject= currentStream;
+
+            if (userVideo.current) {
+                userVideo.current.srcObject = currentStream;
+            }
         });
 
-        peer.on('stream', (currentStream) =>{
-            userVideo.current.srcObject= currentStream;
-        });
 
         socket.on('callaccepted',(data)=>{
             setCallAccepted(true);
-
             peer.signal(data);
 
         });
