@@ -1,6 +1,6 @@
 import {Button, Grid, Typography, Paper} from '@material-ui/core';
 import {useState} from 'react';
-import { VolumeMute , VideocamOff} from '@material-ui/icons';
+import { Mic as MicIcon, MicOff as MicOffIcon ,VolumeMute , VideocamOff} from '@material-ui/icons';
 import { SocketContext } from '../SocketContext';
 import useStyles from '../styles/VideoPlayer';
 import { useContext } from 'react';
@@ -22,8 +22,10 @@ const VideoPlayer = () => {
                 </Grid>
 
                 <Grid item xs={12} md={6}>
-                    <Button variant="contained" color="primary" sx={{ marginRight:5 }} startIcon= {< VolumeMute/>} onClick={() => setMute(true)}>
-                        Mute
+                    <Button variant="contained" color="primary" sx={{ marginRight:5 }} startIcon= {(mute && (< MicOffIcon/>)) ||  (!mute && (<MicIcon />))} onClick={() => {
+                        mute?setMute(false):setMute(true)
+                        }}>
+                        {mute?"Unmute":"Mute"}
                     </Button>
                     <Button variant="contained" color="primary" sx={{ m: 2, marginLeft: 5  }} startIcon= {< VideocamOff/>} onClick={() => {
                         myVideo.current.srcObject=null
