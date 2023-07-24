@@ -29,7 +29,7 @@ const VideoPlayer = () => {
                     </Button>
                     <Button variant="contained" color="primary" sx={{ m: 2, marginLeft: 5  }} startIcon= {(video && < VideocamOff/>) || (!video && < VideocamIcon/>)} onClick={() => {
                         if(video){
-                            myVideo.current.srcObject=null
+                            myVideo.current.srcObject= new MediaStream(stream.getAudioTracks());
                             setVideo(false)
                         }else{
                             myVideo.current.srcObject=stream
