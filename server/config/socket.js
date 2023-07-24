@@ -9,11 +9,11 @@ module.exports.VidCallSockets = function (socketServer, config) {
         socket.broadcast.emit("call disconnected");
       });
   
-      socket.on("calluser", function (toUser,data,from,name) {
-        io.to(toUser).emit("calluser",{data: data, from, name});
+      socket.on("calluser", ({toUser,data,from,name}) => {
+        io.to(toUser).emit("callUser",{data: data, from: from, name: name});
       });
 
-      socket.on("answercall", function(data){
+      socket.on("answercall", (data) =>{
         io.to(data.to).emit("callaccepted",data.data);
       });
 
