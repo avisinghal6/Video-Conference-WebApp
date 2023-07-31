@@ -42,13 +42,14 @@ const ContextProvider =({children})=>{
 
         peer.on('signal', (data)=>{
             console.log("answering")
-            socket.emit('answercall',{data: data,to:call.from});
+            socket.emit('answercall',{data: data,to:call.from, name: name});
         });
 
         peer.on('stream', (currentStream) =>{
             if (userVideo.current) {
                 userVideo.current.srcObject = currentStream;
             }
+            console.log("user")
 
         });
     
@@ -71,12 +72,13 @@ const ContextProvider =({children})=>{
         });
 
 
-        socket.on('callaccepted',(data)=>{
+        socket.on('callaccepted',(data, name)=>{
             setCallAccepted(true);
+            setCall({isReceivedCall:false, data: data,from : me,name: name});
             peer.signal(data);
 
         });
-
+  
         connectionRef.current = peer;
     }
 
@@ -101,7 +103,9 @@ const ContextProvider =({children})=>{
             me,
             callUser,
             leaveCall,
-            answerCall
+            answerCall,
+            setStream,
+            connectionRef
         }}>
             {children}
         </SocketContext.Provider>
