@@ -1,10 +1,10 @@
 body {
   background:
   linear-gradient(
-    rgba(0, 0, 0, 0.3), 
-    rgba(0, 0, 0, 0.3)
+    rgba(112, 28, 28, 0.3), 
+    rgba(23, 177, 175, 0.3)
   ),
-  url(https://i.pinimg.com/originals/8f/14/57/8f14578ef69a4c53352955d1e072eda6.png);
+  url(https://www.webex.com/content/dam/wbx/us/images/virtual-backgrounds/Virtual_Background-Night.jpg?lq3kjP0l2o);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
