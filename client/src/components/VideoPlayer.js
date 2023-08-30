@@ -5,7 +5,7 @@ import { SocketContext } from '../SocketContext';
 import useStyles from '../styles/VideoPlayer';
 import { useContext } from 'react';
 const VideoPlayer = () => {
-    const {name, callAccepted, myVideo, userVideo, callEnded, stream, call, connectionRef}= useContext(SocketContext);
+    const {name, callAccepted, myVideo, userVideo, callEnded, stream, call, connectionRef,screenStream}= useContext(SocketContext);
     const classes = useStyles();
     const [mute,setMute] =useState(false);
     const [video,setVideo] =useState(true);
@@ -51,13 +51,23 @@ const VideoPlayer = () => {
 
             {
                 callAccepted && !callEnded && (
-            
+            <>
             <Paper className={classes.paper}>
                 <Grid item xs={12} md={6}>
                     <Typography variant="h5" gutterBottom> {call.name || 'Name'}</Typography>
                     <video playsInline ref={userVideo} autoPlay className={classes.video}/>
                 </Grid>
             </Paper>
+
+            <Paper className={classes.paper}>
+            <Grid item xs={12} md={6}>
+                <Typography variant="h5" gutterBottom> {call.name || 'Name'}</Typography>
+                <video playsInline ref={screenStream} autoPlay className={classes.video}/>
+            </Grid>
+            </Paper>
+            </>
+            
+            
                 )}
             
             

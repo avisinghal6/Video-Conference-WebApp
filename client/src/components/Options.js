@@ -7,7 +7,7 @@ import { SocketContext } from '../SocketContext';
 import { useContext, useState } from 'react';
 
 const Options = ({children}) => {
-    const {me, callAccepted, name, setName, callEnded, leaveCall, callUser } = useContext(SocketContext);
+    const {me, callAccepted, name, setName, callEnded, leaveCall, callUser,screenShare } = useContext(SocketContext);
     const [idToCall, SetIdToCall] = useState('');
     const classes= useStyles();
     return(
@@ -35,7 +35,7 @@ const Options = ({children}) => {
                                         Hang Up
                                     </Button>
 
-                                    <Button variant="contained" color="primary" startIcon={<ScreenShareIcon fontSize="large" />} fullWidth onClick={leaveCall} className={classes.margin}>
+                                    <Button variant="contained" color="primary" startIcon={<ScreenShareIcon fontSize="large" />} fullWidth onClick={screenShare} className={classes.margin}>
                                     Screen Sharing
                                     </Button>
                                     </>

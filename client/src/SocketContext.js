@@ -16,6 +16,7 @@ const ContextProvider =({children})=>{
     const myVideo =useRef();
     const userVideo =useRef(); 
     const connectionRef =useRef(); 
+    const screenStream=useRef();
     useEffect(() =>{
         navigator.mediaDevices.getUserMedia({video:true, audio: true})
             .then((currentStream) => {
@@ -82,6 +83,16 @@ const ContextProvider =({children})=>{
         connectionRef.current = peer;
     }
 
+    const screenShare=() =>{
+        navigator.mediaDevices.getDisplayMedia()
+            .then((currentStream) => {
+                setStream(currentStream);
+                if (screenStream.current) {
+                    screenStream.current.srcObject = currentStream;
+                }
+            });
+    }
+
     const leaveCall= () =>{
         setCallEnded(true);
 
@@ -105,7 +116,9 @@ const ContextProvider =({children})=>{
             leaveCall,
             answerCall,
             setStream,
-            connectionRef
+            connectionRef,
+            screenShare,
+            screenStream
         }}>
             {children}
         </SocketContext.Provider>
