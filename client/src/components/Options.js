@@ -1,7 +1,8 @@
 import {Button, TextField, Grid, Typography, Container,Paper} from '@material-ui/core';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import useStyles from '../styles/Options';
-import { Assignment, Phone,PhoneDisabled } from '@material-ui/icons';
+import { Assignment, Phone,PhoneDisabled} from '@material-ui/icons';
+import ScreenShareIcon from '@mui/icons-material/ScreenShare';
 import { SocketContext } from '../SocketContext';
 import { useContext, useState } from 'react';
 
@@ -29,9 +30,16 @@ const Options = ({children}) => {
                             <TextField label="ID to call" value={idToCall} onChange={(e)=> SetIdToCall(e.target.value)} fullWidth />
                             {
                                 callAccepted && !callEnded ? (
+                                    <>
                                     <Button variant="contained" color="secondary" startIcon={<PhoneDisabled fontSize="large" />} fullWidth onClick={leaveCall} className={classes.margin}>
                                         Hang Up
                                     </Button>
+
+                                    <Button variant="contained" color="primary" startIcon={<ScreenShareIcon fontSize="large" />} fullWidth onClick={leaveCall} className={classes.margin}>
+                                    Screen Sharing
+                                    </Button>
+                                    </>
+                                    
                                 ):(
                                     <Button variant="contained" color="primary" startIcon={<Phone fontSize="large" />} fullWidth onClick={() => callUser(idToCall)} className={classes.margin}>
                                         Call
