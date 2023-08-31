@@ -3,4 +3,5 @@ Divided the application into two parts: client and server. The application suppo
 
 
 Overview:
-![Uploading Screenshot 2023-08-30 at 7.58.05 PM.png…]()
+
+<img width="1430" alt="Screenshot 2023-08-30 at 7 58 05 PM" src="https://github.com/avisinghal6/Video-Conference-WebApp/assets/97785770/4b70004a-9b0c-4a15-9d45-af5db91c7913">
